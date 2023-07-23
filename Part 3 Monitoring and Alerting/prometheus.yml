@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 30s 
+
+
+scrape_configs:
+  # scrape minecraft server
+- job_name: 'minecraft'
+  static_configs:
+    - targets: ['minecraft:19565']
+      labels:
+        server_name: 'minecraft-docker'

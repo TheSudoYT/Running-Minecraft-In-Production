@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    tty: true
+    stdin_open: true
+    ports:
+      - "25565:25565"
+      # Additional port for prometheus to connect on and gather metrics
+      - "19565:19565"
+    environment:
+      TYPE: "AUTO_CURSEFORGE"
+      CF_API_KEY: "$$2a$$10$$LZRbcgywhhffI8NIN6b27uzS3uTHLAF6XBvMWgfs9rJeE327PHA8a"
+      CF_PAGE_URL: "https://www.curseforge.com/minecraft/modpacks/all-the-mods-8/files/4633481"
+      CF_EXCLUDE_MODS: "486778"
+      MEMORY: "5G"
+      MAX_MEMORY: "8G"
+      VERSION: "1.19.2"
+      EULA: "TRUE"
+    volumes:
+      # attach the relative directory 'data' to the container's /data path
+      - F:\mcdata:/data
+    restart: on-failure:3
+    # The docker networks configuration for the minecraft service
+    networks:
+      # The name of the network to put the minecraft service into
+      minecraft:
+        # A network alias within the docker network to give the minecraft service
+        aliases:
+          - minecraft
+  prometheus:
+    image: bitnami/prometheus
+    tty: true
+    stdin_open: true
+    ports:
+      - "9090:9090"
+    volumes:
+      # The path on your local computer where the prometheus configuration exists mapped to /etc/prometheus/prometheus.yml within the prometheus container
+      - F:\prometheus\prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: on-failure:3
+    networks:
+      minecraft:
+        aliases:
+          - prometheus
+  grafana:
+    image: grafana/grafana
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    volumes:
+      # The path on your local computer where the grafana data will be written to mapped to /var/lib/grafana inside the grafana container
+      - F:\grafana:/var/lib/grafana
+    restart: on-failure:3
+    networks:
+      minecraft:
+        aliases:
+          - grafana
+
+# Docker network configurations
+networks:
+  # The network to configure
+  minecraft:
+    # The minecraft network will be created if it does not exist
+    name: minecraft

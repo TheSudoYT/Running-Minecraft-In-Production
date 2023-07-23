@@ -18,6 +18,9 @@ services:
       CF_EXCLUDE_MODS: "486778"
       # Java memory heap size
       MEMORY: "4G"
+      # Set this to allow Minecraft to access more RAM for world generation
+      # if you keep getting stuck at "Preparing spawn area"
+      MAX_MEMORY: "8G"
       # The Version Minecraft Server to run
       VERSION: "1.19.2"
       # Accept the End User License Agreement
