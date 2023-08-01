@@ -17,7 +17,7 @@
 
 Run Minecraft with docekr CLI
 ```bash
-docker run -d --name minecraft -p 25565:25565 -e EULA=true -v C:\some\path\on\my\pc:/data --restart on-failure itzg/minecraft-server:latest
+docker run -d --name minecraft --network minecraft --network-alias minecraft -p 25565:25565 -e EULA=true -v C:\some\path\on\my\pc:/data --restart on-failure itzg/minecraft-server:latest
 ```
 
 ## Run Minecraft with Docker Compose
