@@ -1,4 +1,4 @@
-# Running Minecraft on Docker
+# Modding Minecraft on Docker
 
 ## Links
 [fix-experience-bug ](https://www.curseforge.com/minecraft/mc-mods/fix-experience-bug/download/4587408/)
