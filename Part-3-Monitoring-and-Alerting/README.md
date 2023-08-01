@@ -27,10 +27,10 @@ docker run -d --name minecraft -p 25565:25565 -e EULA=true -v C:\some\path\on\my
 
 ## Run Prometheus with Docker CLI
 ```bash
-docker run -d --name prometheus --network minecraft --network-alias prometheus -p 9090:9090 bitnami/prometheus
+docker run -d --name prometheus --network minecraft --network-alias prometheus -p 9090:9090 -v C:\some\path\on\my\pc\prometheus.yml:/etc/prometheus/prometheus.yml bitnami/prometheus
 ```
 
 ## Run Grafana with Docker CLI
 ```bash
-docker run -d --name grafana --network minecraft --network-alias grafana -p 3000:3000 grafana/grafana
+docker run -d --name grafana --network minecraft --network-alias grafana -p 3000:3000 -v C:\some\path\on\my\pc:/var/lib/grafana grafana/grafana
 ```
