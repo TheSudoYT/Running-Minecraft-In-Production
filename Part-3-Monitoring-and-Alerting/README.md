@@ -24,3 +24,13 @@ docker run -d --name minecraft -p 25565:25565 -e EULA=true -v C:\some\path\on\my
 1. Put the `docker-compose.yaml` file somewhere on your PC
 2. Edit the file to match your environment
 3. Run `docker compose up -d` within the same directory where your `docker-compose.yaml` file resides.
+
+## Run Prometheus with Docker CLI
+```bash
+docker run -d --name prometheus --network minecraft --network-alias prometheus -p 9090:9090 bitnami/prometheus
+```
+
+## Run Grafana with Docker CLI
+```bash
+docker run -d --name grafana --network minecraft --network-alias grafana -p 3000:3000 grafana/grafana
+```
